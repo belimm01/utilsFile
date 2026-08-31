@@ -1,8 +1,12 @@
 HELP.md
+
+### Build output ###
 target/
+build/
+*.class
+
+### Maven wrapper (keep the scripts, ignore the downloaded jar) ###
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
 
 ### STS ###
 .apt_generated
@@ -25,7 +29,9 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
 
 ### VS Code ###
 .vscode/
+
+### OS / misc ###
+.DS_Store
