@@ -25,7 +25,6 @@ class FileUtils {
     try (Stream<String> lines = Files.lines(Path.of(fileName), StandardCharsets.UTF_8)) {
       lines.forEach(lineSet::add);
     } catch (IOException ignored) {
-      // Preserve original behaviour: an unreadable file yields an empty set.
     }
     return lineSet;
   }

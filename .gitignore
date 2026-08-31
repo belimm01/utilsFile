@@ -1,14 +1,11 @@
 HELP.md
 
-### Build output ###
 target/
 build/
 *.class
 
-### Maven wrapper (keep the scripts, ignore the downloaded jar) ###
 !.mvn/wrapper/maven-wrapper.jar
 
-### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -17,21 +14,17 @@ build/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
 .vscode/
 
-### OS / misc ###
 .DS_Store
