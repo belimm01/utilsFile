@@ -1,38 +1,30 @@
 package com.example.utilsFile;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.LinkedHashSet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 class ExcelUtils {
 
-    static void writeToExcel(LinkedHashSet<String> content, String fileName) {
-        //Blank workbook
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        //Create a blank sheet
-        XSSFSheet sheet = workbook.createSheet("Data");
-        int rowNum = 0;
+  private ExcelUtils() {}
 
-        for (String key : content) {
-            //create a row of excelsheet
-            Row row = sheet.createRow(rowNum++);
-            int cellNum = 0;
-            Cell cell = row.createCell(cellNum++);
-            cell.setCellValue(key);
-        }
-        try {
-            //Write the workbook in file system
-            FileOutputStream out = new FileOutputStream(new File(fileName));
-            workbook.write(out);
-            out.close();
-            System.out.println("xlsx written successfully on disk.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+  static void writeToExcel(LinkedHashSet<String> content, String fileName) {
+    try (var workbook = new XSSFWorkbook()) {
+      var sheet = workbook.createSheet("Data");
+      int rowNum = 0;
+      for (String value : content) {
+        var row = sheet.createRow(rowNum++);
+        row.createCell(0).setCellValue(value);
+      }
+      try (OutputStream out = Files.newOutputStream(Path.of(fileName))) {
+        workbook.write(out);
+      }
+      System.out.println("xlsx written successfully on disk.");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 }
